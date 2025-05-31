@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creator Profile | FGA-HUB</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .banner {
+        height: 220px;
+        background-image: url('https://cdn.pixabay.com/photo/2025/04/30/00/51/purple-leaf-plum-9568184_1280.jpg');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #0d0d0d;
+      object-fit: cover;
+      position: absolute;
+      bottom: -60px;
+      left: 2rem;
+      background-color: #fff;
+    }
+
+    .profile-header {
+      padding-top: 4rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .profile-header h3 {
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-header .username {
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+
+    .profile-header .bio {
+      margin-top: 1rem;
+      color: #ddd;
+    }
+
+    .profile-header .stats {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .content-card {
+      position: relative;
+      background-color: #1a1a1a;
+      border: none;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .content-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .locked .content-img {
+      filter: blur(4px) brightness(0.6);
+    }
+
+    .lock-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .lock-overlay .btn {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner + Profile Picture -->
+  <div class="banner">
+    <img src="https://cdn.pixabay.com/photo/2022/12/25/04/36/dante-7676805_1280.jpg" class="profile-pic" alt="Profile Picture">
+  </div>
+
+  <!-- Profile Info -->
+  <div class="profile-header">
+    <h3>Kaziri Oshiomhole</h3>
+    <div class="username">@dante_spader</div>
+    <div class="bio">Digital artist, photographer, and storyteller. Sharing exclusive content with my amazing supporters 💜</div>
+    <div class="stats">
+      <span><strong>120</strong> Posts</span> •
+      <span><strong>5.2k</strong> Followers</span> •
+      <span><strong>180</strong> Following</span>
+    </div>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="container py-4">
+    <h4 class="mb-4">Exclusive Content</h4>
+    <div class="row g-4">
+
+      <!-- Unlocked Card -->
+      <div class="col-md-4 col-sm-6">
+        <div class="card content-card">
+          <img src="https://cdn.pixabay.com/photo/2025/04/22/05/54/dog-9548923_1280.jpg" class="content-img" alt="Unlocked" />
+        </div>
+      </div>
+
+      <!-- Locked Card 1 -->
+      <div class="col-md-4 col-sm-6">
+        <div class="card content-card locked">
+          <img src="https://cdn.pixabay.com/photo/2025/04/22/05/54/dog-9548923_1280.jpg" class="content-img" alt="Locked" />
+          <div class="lock-overlay">
+            <i class="bi bi-lock-fill fs-2 mb-2"></i>
+            <div>Locked Content</div>
+            <button class="btn btn-sm btn-primary mt-2" onclick="requestAccess('Content 1')">Request Access</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Locked Card 2 -->
+      <div class="col-md-4 col-sm-6">
+        <div class="card content-card locked">
+          <img src="https://cdn.pixabay.com/photo/2025/04/22/05/54/dog-9548923_1280.jpg" class="content-img" alt="Locked" />
+          <div class="lock-overlay">
+            <i class="bi bi-lock-fill fs-2 mb-2"></i>
+            <div>Locked Content</div>
+            <button class="btn btn-sm btn-primary mt-2" onclick="requestAccess('Content 2')">Request Access</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function requestAccess(contentName) {
+      alert(`Requesting access to: ${contentName}`);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | FGA-HUB</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .sidebar {
+      height: 100vh;
+      background-color: #1a1a1a;
+      padding-top: 1rem;
+    }
+
+    .sidebar a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      padding: 0.75rem 1rem;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #2a2a2a;
+      color: #fff;
+    }
+
+    .card {
+      background-color: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
+    .navbar {
+      background-color: #1a1a1a;
+    }
+
+    .navbar .navbar-brand,
+    .navbar .nav-link,
+    .navbar .dropdown-toggle {
+      color: #fff;
+    }
+
+    .navbar .dropdown-menu {
+      background-color: #2a2a2a;
+    }
+
+    .navbar .dropdown-item {
+      color: #fff;
+    }
+
+    .navbar .dropdown-item:hover {
+      background-color: #3a3a3a;
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar p-3 col-md-3 col-lg-2">
+      <h4 class="text-center mb-4">FGA-HUB</h4>
+      <a href="#" class="active">Dashboard</a>
+      <!-- <a href="/content">My Content</a> -->
+      <a href="/profile">My Profile</a>
+      <a href="#">Earnings</a>
+      <a href="#">Subscribers</a>
+      <a href="#">Settings</a>
+      <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg px-4">
+        <div class="container-fluid">
+          <% if (success && success.length > 0) { %>
+            <div class="alert alert-success" role="alert">
+              <%= success[0] %>
+            </div>
+          <% } %>
+          
+          <% if (error && error.length > 0) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= error[0] %>
+            </div>
+          <% } %>
+          <span class="navbar-brand">Dashboard</span>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                <img src="https://cdn.pixabay.com/photo/2022/12/25/04/36/dante-7676805_1280.jpg" alt="User" class="rounded-circle me-1" width="30" height="30" />
+                <%= user.username %>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">View Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider"/></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <div class="container mt-4">
+        <!-- Upload Button -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">Overview</h4>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+            <i class="bi bi-upload me-1"></i> Upload Content
+          </button>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card p-4 text-center">
+              <h5>Subscribers</h5>
+              <h2>1,024</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card p-4 text-center">
+              <h5>Monthly Earnings</h5>
+              <h2>$3,540</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card p-4 text-center">
+              <h5>New Messages</h5>
+              <h2>17</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <h4>Recent Subscribers</h4>
+          <table class="table table-dark table-striped mt-3">
+            <thead>
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Subscribed On</th>
+                <th scope="col">Plan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>john_doe</td>
+                <td>2025-04-30</td>
+                <td>Monthly</td>
+              </tr>
+              <tr>
+                <td>creatorqueen</td>
+                <td>2025-04-29</td>
+                <td>Yearly</td>
+              </tr>
+              <tr>
+                <td>viewerguy</td>
+                <td>2025-04-28</td>
+                <td>Monthly</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Upload Content Modal -->
+  <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title" id="uploadModalLabel">Upload New Content</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <form id="uploadForm">
+            <div class="mb-3">
+              <label for="contentTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="contentTitle" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Content Type</label>
+              <div>
+                <input type="radio" id="typeImage" name="contentType" value="image" checked />
+                <label for="typeImage" class="me-3">Image</label>
+
+                <input type="radio" id="typeVideo" name="contentType" value="video" />
+                <label for="typeVideo" class="me-3">Video</label>
+
+                <input type="radio" id="typeOther" name="contentType" value="other" />
+                <label for="typeOther">Other</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="contentImage" class="form-label">Upload File</label>
+              <input
+                type="file"
+                class="form-control"
+                id="contentImage"
+                accept="image/*,video/*"
+                required
+                onchange="previewMedia(event)"
+              />
+            </div>
+
+            <div class="mb-3 text-center">
+              <img
+                id="imagePreview"
+                src=""
+                alt="Preview"
+                class="img-fluid rounded d-none"
+                style="max-height: 200px;"
+              />
+              <video
+                id="videoPreview"
+                controls
+                class="img-fluid rounded d-none"
+                style="max-height: 200px;"
+              ></video>
+            </div>
+
+            <!-- Uploading indicator -->
+            <div id="uploadingIndicator" class="d-none text-center mb-3">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Uploading...
+            </div>
+
+            <!-- Progress bar -->
+            <div id="progressContainer" class="progress mb-3" style="display: none;">
+              <div
+                id="progressBar"
+                class="progress-bar"
+                role="progressbar"
+                style="width: 0%"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Upload</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script>
+  const uploadForm = document.getElementById('uploadForm');
+const contentImageInput = document.getElementById('contentImage');
+const contentTitleInput = document.getElementById('contentTitle');
+const imagePreview = document.getElementById('imagePreview');
+const videoPreview = document.getElementById('videoPreview');
+const uploadingIndicator = document.getElementById('uploadingIndicator');
+const progressContainer = document.getElementById('progressContainer');
+const progressBar = document.getElementById('progressBar');
+const submitButton = uploadForm.querySelector('button[type="submit"]');
+
+// Preview image or video
+function previewMedia(event) {
+  const file = event.target.files[0];
+  imagePreview.classList.add('d-none');
+  videoPreview.classList.add('d-none');
+
+  if (!file) return;
+
+  if (file.type.startsWith('image/')) {
+    imagePreview.src = URL.createObjectURL(file);
+    imagePreview.classList.remove('d-none');
+    videoPreview.src = '';
+  } else if (file.type.startsWith('video/')) {
+    videoPreview.src = URL.createObjectURL(file);
+    videoPreview.classList.remove('d-none');
+    imagePreview.src = '';
+  }
+}
+
+uploadForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const selectedType = document.querySelector('input[name="contentType"]:checked').value;
+  const file = contentImageInput.files[0];
+
+  if (!file) {
+    alert('Please select a file to upload.');
+    return;
+  }
+
+  // Disable button and show uploading indicator & progress bar
+  submitButton.disabled = true;
+  uploadingIndicator.classList.remove('d-none');
+  progressContainer.style.display = 'block';
+  progressBar.style.width = '0%';
+  progressBar.setAttribute('aria-valuenow', 0);
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('title', contentTitleInput.value);
+  formData.append('type', selectedType);
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.upload.onprogress = (event) => {
+    if (event.lengthComputable) {
+      const percent = Math.round((event.loaded / event.total) * 100);
+      progressBar.style.width = percent + '%';
+      progressBar.setAttribute('aria-valuenow', percent);
+    }
+  };
+
+  xhr.onload = () => {
+    submitButton.disabled = false;
+    uploadingIndicator.classList.add('d-none');
+    progressContainer.style.display = 'none';
+
+    if (xhr.status >= 200 && xhr.status < 300) {
+      alert('Upload successful!');
+      uploadForm.reset();
+      imagePreview.classList.add('d-none');
+      videoPreview.classList.add('d-none');
+    } else {
+      try {
+        const res = JSON.parse(xhr.responseText);
+        alert('Upload failed: ' + (res.error || 'Unknown error'));
+      } catch {
+        alert('Upload failed: Unknown error');
+      }
+    }
+  };
+
+  xhr.onerror = () => {
+    submitButton.disabled = false;
+    uploadingIndicator.classList.add('d-none');
+    progressContainer.style.display = 'none';
+    alert('Upload error. Please try again.');
+  };
+
+  xhr.open('POST', '/v1/upload');
+  xhr.send(formData);
+});
+
+// Expose preview function globally for inline onchange handler
+window.previewMedia = previewMedia;
+</script>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
