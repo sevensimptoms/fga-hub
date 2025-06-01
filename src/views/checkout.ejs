@@ -1,0 +1,12 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Checkout Summary</h2>
+  <div class="card p-4 shadow">
+    <h5>Plan: <%= plan.name %></h5>
+    <p><strong>Price:</strong> $<%= plan.price %> / <%= plan.interval %></p>
+    <p><strong>Description:</strong> <%= plan.description %></p>
+    <form action="/payment/options" method="POST">
+      <input type="hidden" name="planId" value="<%= plan._id %>">
+      <button type="submit" class="btn btn-primary mt-3 w-100">Continue to Payment</button>
+    </form>
+  </div>
+</div>

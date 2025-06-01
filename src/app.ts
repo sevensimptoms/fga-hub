@@ -116,4 +116,8 @@ app.get('/content', (_req, res) => {
   res.render('content');
 });
 
+app.get('/checkout', (_req, res) => {
+  res.render('checkout');
+});
+
 export default app;
