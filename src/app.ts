@@ -74,7 +74,7 @@ app.get('/confirm-email', async (_req, res) => {
 
   let userId, verificationToken;
   try {
-    ({ userId, verificationToken } = JSON.parse(payload));
+    // ({ userId, verificationToken } = JSON.parse(payload));
   } catch (err) {
     console.error('Failed to parse Redis payload:', err);
     throw new BadRequestException('Corrupted verification data');
